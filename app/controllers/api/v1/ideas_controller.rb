@@ -30,7 +30,7 @@ module Api
 
       def update
         idea = Idea.find(params[:id])
-        if idea.update_attributes(idea_params)
+        if idea.update(idea_params)
           render json: {status: 'Success', data: idea}, status: :ok        
         else
           render json: {status: 'Error', data: idea.errors}, status: :unprocessable_entity        
