@@ -10,6 +10,22 @@ module Api
         idea = Idea.find(params[:id])
         render json: {status: 'Success', data: idea}, status: :ok
       end 
+
+      def create
+        idea = Idea.new(idea_params)
+        
+        if idea.save
+          render json: {status: 'Success', data: idea}, status: :ok
+        else
+          render json: {status: 'Error', data: idea.errors}, status: :unprocessable_entity
+        end
+      end
+
+      private
+
+      def idea_params
+        params.permit(:title, :body)
+      end
     end
   end
 end
